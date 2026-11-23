@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0F2942" />
+  <title>Sandino Emprendimiento — Pedidos y Reventa</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-row">
+      <img id="brandLogo" src="assets/logo.jpg" alt="Sandino Emprendimiento" class="brand-logo" onerror="this.style.display='none'" />
+      <div class="brand-info">
+        <h1>Sandino Emprendimiento</h1>
+        <p class="subtitle">Compra y reventa · San Lorenzo, Paraguay</p>
+      </div>
+    </div>
+    <nav class="tab-bar" role="tablist" aria-label="Navegación principal">
+      <button type="button" class="tab-btn active" data-tab="catalogo" role="tab" aria-selected="true">Catálogo</button>
+      <button type="button" class="tab-btn" data-tab="carrito" role="tab" aria-selected="false">
+        Pedido <span id="cartBadge" class="badge">0</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="historial" role="tab" aria-selected="false">Historial</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <!-- SECCIÓN 1: CATÁLOGO (COMPRA Y REVENTA) -->
+    <section id="tab-catalogo" class="tab-panel active" role="tabpanel">
+      <div class="notice-banner">
+        <strong>Modalidad de reventa:</strong> Productos seleccionados listos para entrega o reventa. Sin errores ni recargas ocultas.
+      </div>
+
+      <div class="filter-bar">
+        <button type="button" class="filter-chip active" data-category="todos">Todos</button>
+        <button type="button" class="filter-chip" data-category="panificados">Panificados</button>
+        <button type="button" class="filter-chip" data-category="combos">Combos y Eventos</button>
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <!-- SECCIÓN 2: PEDIDO / CARRITO -->
+    <section id="tab-carrito" class="tab-panel" role="tabpanel">
+      <h2>Resumen del Pedido</h2>
+      <div id="cartItemsContainer" class="cart-list"></div>
+
+      <div id="checkoutBox" class="checkout-card hidden">
+        <div class="summary-line">
+          <span>Cantidad total de unidades:</span>
+          <strong id="totalUnits">0</strong>
+        </div>
+        <div class="summary-line total-line">
+          <span>Total estimado (Gs.):</span>
+          <strong id="totalAmount">0 Gs.</strong>
+        </div>
+
+        <form id="orderForm" class="order-form" novalidate>
+          <label for="customerName">Nombre del cliente o comercio *</label>
+          <input type="text" id="customerName" name="customerName" placeholder="Ej. María González / SUMED" required />
+
+          <label for="customerPhone">Teléfono / WhatsApp *</label>
+          <input type="tel" id="customerPhone" name="customerPhone" placeholder="Ej. 0981 000 000" required />
+
+          <label for="deliveryAddress">Dirección de entrega (San Lorenzo / zona) *</label>
+          <input type="text" id="deliveryAddress" name="deliveryAddress" placeholder="Barrio, calle o referencia" required />
+
+          <label for="orderNotes">Notas adicionales (opcional)</label>
+          <textarea id="orderNotes" name="orderNotes" rows="2" placeholder="Horario preferido, factura, etc."></textarea>
+
+          <div id="formError" class="form-error hidden" role="alert"></div>
+
+          <div class="action-buttons">
+            <button type="submit" class="btn btn-primary">Confirmar y Guardar Pedido</button>
+            <button type="button" id="clearCartBtn" class="btn btn-secondary">Vaciar Carrito</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: HISTORIAL -->
+    <section id="tab-historial" class="tab-panel" role="tabpanel">
+      <div class="history-header">
+        <h2>Pedidos Guardados</h2>
+        <button type="button" id="clearHistoryBtn" class="btn btn-small btn-outline">Limpiar historial</button>
+      </div>
+      <div id="historyContainer" class="history-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
